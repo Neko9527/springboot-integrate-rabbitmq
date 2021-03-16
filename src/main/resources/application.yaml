@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    addresses: 192.168.110.134
+    username: admin
+    password: admin
+    virtual-host: / #注意虚拟机名称，我这里使用的是 /
+    port: 5672
+    listener:
+      direct:
+        acknowledge-mode: auto #自动发送消息被消费的回执给RabbitMQ
+        prefetch: 1 #一次只消费一条消息
+
+server:
+  port: 9001
