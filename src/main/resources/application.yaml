@@ -1,6 +1,6 @@
 spring:
   rabbitmq:
-    addresses: 192.168.110.134
+    addresses: 192.168.3.131
     username: admin
     password: admin
     virtual-host: / #注意虚拟机名称，我这里使用的是 /

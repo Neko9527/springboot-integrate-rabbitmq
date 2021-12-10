@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * @author wangxuechao
@@ -31,5 +32,15 @@ public class MqController {
         amqpAdmin.deleteQueue(Constants.MqConstants.delayQueue);
         amqpAdmin.deleteQueue(Constants.MqConstants.commonQueue);
         amqpAdmin.deleteExchange(Constants.MqConstants.delayExChange);
+    }
+
+    @PostMapping("/order")
+    public void saveOrder() {
+        //创建订单
+        String orderId = UUID.randomUUID().toString();
+        //减少库存
+        //....
+        //发送消息
+        template.convertAndSend("fanout-exchange","",orderId);
     }
 }
