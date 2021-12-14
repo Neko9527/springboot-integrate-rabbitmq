@@ -62,4 +62,14 @@ public class MqController {
         String str = UUID.randomUUID().toString();
         template.convertAndSend("topic-exchange","com.sms.email.test",str);
     }
+
+    @PostMapping("/headers")
+    public void headers() {
+        String str = UUID.randomUUID().toString();
+        MessageProperties properties = new MessageProperties();
+        properties.setHeader("x",1);
+        properties.setHeader("y",1);
+        Message message = new Message(str.getBytes(),properties);
+        template.convertAndSend("headers-exchange","",message);
+    }
 }
