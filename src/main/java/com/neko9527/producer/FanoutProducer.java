@@ -1,4 +1,4 @@
-package com.neko9527.config;
+package com.neko9527.producer;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021-12-10
  */
 @Configuration
-public class RabbitMqConfig {
+public class FanoutProducer {
 
 
     @Bean

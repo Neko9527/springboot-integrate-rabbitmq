@@ -21,6 +21,10 @@ public class MqController {
     @Resource
     private AmqpAdmin amqpAdmin;
 
+    /**
+     * 延时队列
+     * @param msg
+     */
     @PostMapping("/send")
     public void send(String msg) {
         template.convertAndSend(Constants.MqConstants.delayExChange, Constants.MqConstants.delayKey, msg);
@@ -34,7 +38,10 @@ public class MqController {
         amqpAdmin.deleteExchange(Constants.MqConstants.delayExChange);
     }
 
-    @PostMapping("/order")
+    /**
+     * fanout模式
+     */
+    @PostMapping("/fanout")
     public void saveOrder() {
         //创建订单
         String orderId = UUID.randomUUID().toString();
@@ -42,5 +49,17 @@ public class MqController {
         //....
         //发送消息
         template.convertAndSend("fanout-exchange","",orderId);
+    }
+
+    @PostMapping("/direct")
+    public void direct() {
+        String str = UUID.randomUUID().toString();
+        template.convertAndSend("direct-exchange","sms",str);
+    }
+
+    @PostMapping("/topic")
+    public void topic() {
+        String str = UUID.randomUUID().toString();
+        template.convertAndSend("topic-exchange","com.sms.email.test",str);
     }
 }
